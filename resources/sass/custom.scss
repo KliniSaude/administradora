@@ -1,0 +1,12 @@
+$klini_primary: #31D1AD;
+$klini_secondary: #95BCCA;
+
+$theme-colors: (
+  "klini-primary": $klini_primary,
+  "klini-secondary": $klini_secondary
+);
+
+$pagination-color:  #fff;
+$pagination-bg:  $klini_secondary;
+$pagination-active-bg: $klini_primary;
+$pagination-active-border-color: $klini_primary;
