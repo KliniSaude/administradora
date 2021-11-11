@@ -15,20 +15,8 @@ class LoginController extends Controller
         return view('login.login');
     }
 
-    public function dashboard()
+    public function login(Request $request)
     {
-        $user = Auth::user()->name;
-        if (Auth::check() === true) {
-           return view('administradora.dashboard', [
-               'user' => $user
-           ]);
-        }
-
-        return redirect()->route('login');
-    }
-
-    public function login(Request $request)    {
-
         if (!filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
             return redirect()->back()->withErrors(['E-mail não é valido!']);
         }
@@ -40,7 +28,6 @@ class LoginController extends Controller
         }
 
         return redirect()->back()->withErrors(['E-mail ou senha não conferem!']);
-
     }
 
     public function logout()

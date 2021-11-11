@@ -5,7 +5,7 @@
               role="button" aria-controls="offcanvasExample" style="color: #000">
               <i class="fas fa-bars fs-3"></i>
           </a>
-          <img src="{{ 'storage//img/logos/klini-saude.png' }}" alt="Klini Saúde">
+          <img src="{{ url('storage/img/logos/klini-saude.png') }}" alt="Klini Saúde">
       </div>
 
 

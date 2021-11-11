@@ -1,5 +1,5 @@
-<?php $title = "Proposta Interna - Klini Saúde" ?>
-<?php include_once('../template/header.php'); ?>
+@extends('layout.main')
+@section('content')
 <div class="container py-5">
 
   <a href="cadastrar-proposta.php" class="btn btn-klini-primary btn-lg text-white"><i class="fas fa-plus"></i> cadastrar nova proposta</a>
@@ -63,38 +63,27 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">
-              <input class="form-check-input export_selected" type="checkbox" value="" name="" id="">
-            </th>
-            <th scope="row">#0</th>
-            <td>Moisés Fausto da Silva</td>
-            <td>143.708.227-00</td>
-            <td>110</td>
-            <td>10</td>
-            <td><a class="btn bg-warning text-white" href="" data-bs-toggle="modal" data-bs-target="#exampleModal" role="button">RECUSADO</a></td>
-            <td>
-              <a class="btn btn-klini-primary text-white" href="" role="button"><i class="fas fa-edit"></i></a>
-              <a class="btn bg-danger text-white" id="delete" data-delete="" role="button"><i class="fas fa-trash-alt"></i></a>
-            </td>
-          </tr>
-          <?php for ($i=1; $i<=10; $i++): ?>
-          <tr>
-            <th scope="row">
-              <input class="form-check-input export_selected" type="checkbox" value="" name="" id="">
-            </th>
-            <th scope="row">#<?= $i ?></th>
-            <td>Moisés Fausto da Silva</td>
-            <td>143.708.227-00</td>
-            <td>110</td>
-            <td>10</td>
-            <td>APROVADO</td>
-            <td>
-              <a class="btn btn-klini-primary text-white" href="" role="button"><i class="fas fa-edit"></i></a>
-              <a class="btn bg-danger text-white" href="" role="button"><i class="fas fa-trash-alt"></i></a>
-            </td>
-          </tr>
-          <?php endfor; ?>
+          @foreach ($proposals as $proposal)
+            <tr>
+              <th scope="row">
+                <input class="form-check-input export_selected" type="checkbox" value="" name="" id="">
+              </th>
+              <th scope="row">{{ $proposal->id }}</th>
+              <td>{{ $proposal->nome_associado }}</td>
+              <td>{{ $proposal->cpf }}</td>
+              <td>{{ $proposal->contrato }}</td>
+              <td>{{ $proposal->data }}</td>
+              @if ($proposal->statusID == 5)
+              <td><a class="btn bg-warning text-white" href="" data-bs-toggle="modal" data-bs-target="#exampleModal" role="button">{{ $proposal->status }}</a></td>
+              @else
+              <td>{{ $proposal->status }}</td>
+              @endif
+              <td>
+                <a class="btn btn-klini-primary text-white" href="" role="button"><i class="fas fa-edit"></i></a>
+                <a class="btn bg-danger text-white" id="delete" data-delete="" role="button"><i class="fas fa-trash-alt"></i></a>
+              </td>
+            </tr>
+          @endforeach
         </tbody>
       </table>
     </div>
@@ -122,4 +111,4 @@
     </div>
   </div>
 </div>
-<?php include_once('../template/footer.php'); ?>
+@endsection

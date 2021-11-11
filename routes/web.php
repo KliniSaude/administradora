@@ -11,8 +11,21 @@
 |
 */
 
+/**
+ * LOGIN
+ */
 Route::get('/', 'LoginController@showLoginForm')->name('admin.login');
-Route::get('/login', 'LoginController@dashboard')->name('admin.dashboard');
-Route::get('/logout', 'LoginController@logout')->name('admin.logout');
 Route::post('/login/do', 'LoginController@login')->name('admin.login.do');
+Route::middleware(['auth'])->group(function () {
+  /**
+   * DASHBOARD
+   */
+  Route::get('/dashboard', 'Admin\\ProposeController@dashboard')->name('admin.dashboard');
+  Route::get('/proposta/{id}', 'Admin\\ProposeController@show')->name('admin.propostas');
 
+
+});
+/**
+ * LOGOUT
+ */
+Route::get('/logout', 'LoginController@logout')->name('admin.logout');
