@@ -2,7 +2,8 @@
 @section('content')
 <div class="container py-5">
 
-  <a href="cadastrar-proposta.php" class="btn btn-klini-primary btn-lg text-white"><i class="fas fa-plus"></i> cadastrar nova proposta</a>
+  <a href="{{ url()->previous() }}" class="btn btn-klini-secondary btn-lg text-white"><i class="fas fa-arrow-left"></i> voltar</a>
+  <a href="{{ route('admin.create.proposta') }}" class="btn btn-klini-primary btn-lg text-white"><i class="fas fa-plus"></i> cadastrar nova proposta</a>
 
   <form action="../classes/Selects.php" method="post">
     <div class="row mt-5">

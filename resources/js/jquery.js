@@ -77,6 +77,6 @@ $(".previous").on('click', function(){
 	});
 });
 
-$(".submit").on('click', function(){
-	return false;
-})
+// $(".submit").on('click', function(){
+// 	return false;
+// })

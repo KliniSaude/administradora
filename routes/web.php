@@ -23,6 +23,12 @@ Route::middleware(['auth'])->group(function () {
   Route::get('/dashboard', 'Admin\\ProposeController@dashboard')->name('admin.dashboard');
   Route::get('/proposta/{id}', 'Admin\\ProposeController@show')->name('admin.propostas');
 
+  /**
+   * Proposta
+   */
+  Route::get('nova-proposta', 'Admin\\ProposeController@create')->name('admin.create.proposta');
+  Route::post('/cadastrar', 'Admin\\ProposeController@store')->name('admin.store.proposta');
+
 
 });
 /**

@@ -13,7 +13,7 @@
           aria-labelledby="offcanvasExampleLabel">
           <div class="offcanvas-header justify-content-around">
               <!-- <span><i class="fas fa-user fs-3"></i></span> -->
-              <img src="{{ 'storage/img/logos/perfil-female.png' }}" alt="Profile User" width="60px">
+              <img src="{{ url('storage/img/logos/perfil-female.png') }}" alt="Profile User" width="60px">
               <h5 class="offcanvas-title" id="offcanvasExampleLabel"> {{ $user }} <br> <span
                       class="text-uppercase text-muted fw-light" style="font-size: 12px;">administradora</span>
               </h5>
@@ -24,11 +24,11 @@
               <ul class="nav flex-column">
                   <li class="nav-item">
                       <a class="nav-link fw-bold text-secondary text-uppercase active" aria-current="page"
-                          href="http://localhost:8080/views/administradora/proposta-externa.php">Ver Propostas</a>
+                          href="{{ route('admin.dashboard') }}">Ver Propostas</a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link fw-bold text-secondary text-uppercase"
-                          href="http://localhost:8080/views/administradora/cadastrar-proposta.php">Nova
+                          href="{{ route('admin.create.proposta') }}">Nova
                           Proposta</a>
                   </li>
                   <li class="nav-item">

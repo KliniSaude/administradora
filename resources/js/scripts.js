@@ -107,7 +107,7 @@ function carregarDependentes() {
     let codigoGrupoCarencia = el.codigoGrupoCarencia;
     let codigoGrupoOdonto = el.codigoGrupoOdonto;
     let dependente_container = ` <div class="dependente text-start" data-id="${identificador}">
-                                  <select name="codigo_dependencia" class="flex-grow-1" id="codigo_dependencia">
+                                  <select name="codigo_dependencia[]" class="flex-grow-1" id="codigo_dependencia">
                                     <option>Dependencia</option>
                                     <option value="2" ${ codDependente == 2 ? 'selected' : ''}>Companheiro(a)</option>
                                     <option value="3" ${ codDependente == 3 ? 'selected' : ''}>Cônjuge</option>
@@ -118,14 +118,14 @@ function carregarDependentes() {
                                     <option value="8" ${ codDependente == 8 ? 'selected' : ''}>Pai</option>
                                     <option value="9" ${ codDependente == 9 ? 'selected' : ''}>Mãe</option>
                                   </select>
-                                  <input name="nome_dependente" placeholder="Nome" class="flex-grow-1" id="nome_dependente" type="text" value="${nome}"/>
-                                  <input name="cpf_dependente" placeholder="CPF" class="flex-grow-1" id="cpf_dependente" type="text" value="${cpf}"/>
-                                  <select name="sexo_dependente" class="flex-grow-1" id="sexo_dependente">
+                                  <input name="nome_dependente[]" placeholder="Nome" class="flex-grow-1" id="nome_dependente" type="text" value="${nome}"/>
+                                  <input name="cpf_dependente[]" placeholder="CPF" class="flex-grow-1" id="cpf_dependente" type="text" value="${cpf}"/>
+                                  <select name="sexo_dependente[]" class="flex-grow-1" id="sexo_dependente">
                                     <option>Sexo</option>
                                     <option value="M" ${ sexo == 'M' ? 'selected' : ''}>Masculino</option>
                                     <option value="F" ${ sexo == 'F' ? 'selected' : ''}>Feminino</option>
                                   </select>
-                                  <select name="estado_civil_dependente" class="flex-grow-1" id="estado_civil_dependente">
+                                  <select name="estado_civil_dependente[]" class="flex-grow-1" id="estado_civil_dependente">
                                     <option>Estado Civil</option>
                                     <option value="1" ${ estadoCivil == 1 ? 'selected' : ''}>Solteiro</option>
                                     <option value="2" ${ estadoCivil == 2 ? 'selected' : ''}>Casado</option>
@@ -135,17 +135,17 @@ function carregarDependentes() {
                                     <option value="8" ${ estadoCivil == 8 ? 'selected' : ''}>Companheiro(a)</option>
                                     <option value="6" ${ estadoCivil == 6 ? 'selected' : ''}>Outros</option>
                                   </select>
-                                  <input name="nascimento_dependente" placeholder="Nascimento" class="flex-grow-1" id="nascimento_dependente" type="date" value="${nascimento}"/>
-                                  <input name="filiacao_dependente" placeholder="Filiação" id="filiacao_dependente" class="flex-grow-2" type="text" value="${filiacao}"/>
-                                  <input type="text" name="numero_unico_saude_dependente" id="numero_unico_saude" class="flex-grow-1" placeholder="Número Unico Saúde" value="${numeroUnicoSaude}" />
-                                  <input type="text" name="numero_dn_dependente" id="numero_dn" placeholder="Número DN" class="flex-grow-1" value="${numeroDN}" />
-                                  <select name="codigo_grupo_carencia_dependente" id="codigo_grupo_carencia_dependente" class="flex-grow-2">
+                                  <input name="nascimento_dependente[]" placeholder="Nascimento" class="flex-grow-1" id="nascimento_dependente" type="date" value="${nascimento}"/>
+                                  <input name="filiacao_dependente[]" placeholder="Filiação" id="filiacao_dependente" class="flex-grow-2" type="text" value="${filiacao}"/>
+                                  <input type="text" name="numero_unico_saude_dependente[]" id="numero_unico_saude" class="flex-grow-1" placeholder="Número Unico Saúde" value="${numeroUnicoSaude}" />
+                                  <input type="text" name="numero_dn_dependente[]" id="numero_dn" placeholder="Número DN" class="flex-grow-1" value="${numeroDN}" />
+                                  <select name="codigo_grupo_carencia_dependente[]" id="codigo_grupo_carencia_dependente" class="flex-grow-2">
                                     <option>Grupo Carencia</option>
                                     <option value="6601" ${ codigoGrupoCarencia == 6601 ? 'selected' : ''}>CARENCIA CA 1</option>
                                     <option value="6602" ${ codigoGrupoCarencia == 6602 ? 'selected' : ''}>CARENCIA CA 2</option>
                                     <option value="6603" ${ codigoGrupoCarencia == 6603 ? 'selected' : ''}>CARENCIA CA 3</option>
                                   </select>
-                                  <select name="codigo_grupo_carencia_odonto_dependente" id="codigo_grupo_carencia_odonto_dependente" class="flex-grow-2">
+                                  <select name="codigo_grupo_carencia_odonto_dependente[]" id="codigo_grupo_carencia_odonto_dependente" class="flex-grow-2">
                                     <option>Grupo Carência Odonto</option>
                                     <option value="8801" ${ codigoGrupoOdonto == 8801 ? 'selected' : ''}>ODONTOLOGICO CPA1</option>
                                   </select>
@@ -248,9 +248,12 @@ function travarOutros(element) {
 }
 
 //init
-document.querySelector("#btnAdicionarDependentes").addEventListener("click", adicionarDependentes);
 carregarDependentes();
 
+let addDependentes = document.querySelector("#btnAdicionarDependentes")
+if (addDependentes) {
+  addDependentes.addEventListener("click", adicionarDependentes);
+}
 
 
 // API's
@@ -274,7 +277,6 @@ zipcode.addEventListener('focusout', () => {
     .then(response => response.json())
     .then(result => {
       address.value = result.logradouro
-      complement.value = result.complemento
       neighborhood.value = result.bairro
       city.value = result.localidade
       state.value = result.uf

@@ -176,10 +176,9 @@ $(".previous").on('click', function () {
     //this comes from the custom easing plugin
     easing: 'easeInOutBack'
   });
-});
-$(".submit").on('click', function () {
-  return false;
-});
+}); // $(".submit").on('click', function(){
+// 	return false;
+// })
 
 /***/ }),
 
@@ -190,7 +189,7 @@ $(".submit").on('click', function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\laragon\www\administradora\resources\js\jquery.js */"./resources/js/jquery.js");
+module.exports = __webpack_require__(/*! C:\laragon\www\movimentacao\resources\js\jquery.js */"./resources/js/jquery.js");
 
 
 /***/ })
