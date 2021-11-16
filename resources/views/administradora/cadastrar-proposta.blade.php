@@ -4,7 +4,6 @@
 <div class="container vh-100">
   <form id="msform" method="POST" action="{{ route('admin.store.proposta') }}">
     @csrf
-
     <!-- progressbar -->
     <ul id="progressbar">
       <li class="active">Contrato</li>
@@ -25,26 +24,17 @@
         <div class="col-6">
           <select name="codigo_tipo_operacao" id="codigo_tipo_operacao">
             <option value="">Tipo de Operação</option>
-            <option value="1" {{ old('codigo_tipo_operacao') == 1 ? 'selected' : '' }}>INCLUSÃO</option>
-            <option value="2" {{ old('codigo_tipo_operacao') == 2 ? 'selected' : '' }}>EXCLUSÃO</option>
-            <option value="3" {{ old('codigo_tipo_operacao') == 3 ? 'selected' : '' }}>SUSPENSÃO</option>
+            <option value="1">INCLUSÃO</option>
+            <option value="2">EXCLUSÃO</option>
+            <option value="3">SUSPENSÃO</option>
           </select>
         </div>
         <div class="col-6">
           <select name="fk_contrato" id="numero_contrato">
             <option value="">Contrato</option>
-            <option value="115" data-vigencia="01" {{ old('fk_contrato') == 01 ? 'selected' : '' }}>115 -ASSOC. BRASILEIRA DOS ESTUDANTES</option>
-            <option value="116" data-vigencia="01" {{ old('fk_contrato') == 01 ? 'selected' : '' }}>116 - ASSOC. BRASILEIRA DOS ESTUDANTES</option>
-            <option value="117" data-vigencia="10" {{ old('fk_contrato') == 10 ? 'selected' : '' }}>117 - ASSOC. BRASILEIRA DOS ESTUDANTES</option>
-            <option value="118" data-vigencia="10" {{ old('fk_contrato') == 10 ? 'selected' : '' }}>118 - ASSOC. BRASILEIRA DOS ESTUDANTES</option>
-            <option value="119" data-vigencia="20" {{ old('fk_contrato') == 20 ? 'selected' : '' }}>119 - ASSOC. BRASILEIRA DOS ESTUDANTES</option>
-            <option value="120" data-vigencia="20" {{ old('fk_contrato') == 20 ? 'selected' : '' }}>120 - ASSOC. BRASILEIRA DOS ESTUDANTES</option>
-            <option value="121" data-vigencia="01" {{ old('fk_contrato') == 01 ? 'selected' : '' }}>121 - ASSOC. DOS FUNCIONARIOS DA INDUSTRIA E COMERCIO</option>
-            <option value="122" data-vigencia="01" {{ old('fk_contrato') == 01 ? 'selected' : '' }}>122 - ASSOC. DOS FUNCIONARIOS DA INDUSTRIA E COMERCIO</option>
-            <option value="123" data-vigencia="10" {{ old('fk_contrato') == 10 ? 'selected' : '' }}>123 - ASSOC. DOS FUNCIONARIOS DA INDUSTRIA E COMERCIO</option>
-            <option value="124" data-vigencia="10" {{ old('fk_contrato') == 10 ? 'selected' : '' }}>124 - ASSOC. DOS FUNCIONARIOS DA INDUSTRIA E COMERCIO</option>
-            <option value="125" data-vigencia="20" {{ old('fk_contrato') == 20 ? 'selected' : '' }}>125 - ASSOC. DOS FUNCIONARIOS DA INDUSTRIA E COMERCIO</option>
-            <option value="126" data-vigencia="20" {{ old('fk_contrato') == 20 ? 'selected' : '' }}>126 - ASSOC. DOS FUNCIONARIOS DA INDUSTRIA E COMERCIO</option>
+            @foreach ($entities as $entity)
+            <option value="{{ $entity->contrato }}" data-vigencia="{{ $entity->data }}" >{{ $entity->contrato }} - {{ $entity->nome_entidade }}</option>
+            @endforeach
           </select>
         </div>
         <div class="col-6 d-none" id="numero_associado">
@@ -53,12 +43,12 @@
         <div class="col-6 d-none" id="motivo_exclusao">
           <select name="codigo_motivo_exclusao">
             <option>Motivo da Exclusão</option>
-            <option value="1" {{ old('codigo_motivo_exclusao') == 1 ? 'selected' : '' }}>A pedido do beneficiário</option>
-            <option value="2" {{ old('codigo_motivo_exclusao') == 2 ? 'selected' : '' }}>Fim da depenpendência a um Titular</option>
-            <option value="4" {{ old('codigo_motivo_exclusao') == 3 ? 'selected' : '' }}>Exclusão por inadimplência</option>
-            <option value="5" {{ old('codigo_motivo_exclusao') == 5 ? 'selected' : '' }}>Falecimento</option>
-            <option value="11" {{ old('codigo_motivo_exclusao') == 11 ? 'selected' : '' }}>Exclusão por Portabilidade</option>
-            <option value="50" {{ old('codigo_motivo_exclusao') == 50 ? 'selected' : '' }}>Motivo financeiro</option>
+            <option value="1">A pedido do beneficiário</option>
+            <option value="2">Fim da depenpendência a um Titular</option>
+            <option value="4">Exclusão por inadimplência</option>
+            <option value="5">Falecimento</option>
+            <option value="11">Exclusão por Portabilidade</option>
+            <option value="50">Motivo financeiro</option>
           </select>
         </div>
       </div>
@@ -66,13 +56,13 @@
         <div class="col d-none" id="data_inclusao">
           <div class="text-start">
             <label class="form-label text-uppercase">Data Inclusão</label>
-            <input type="date" name="data_inclusao"value="2020-12-1" disabled />
+            <input type="date" name="data_inclusao" value="" />
           </div>
         </div>
         <div class="col d-none" id="data_exclusao">
           <div class="text-start">
             <label class="form-label text-uppercase">Data Exclusão</label>
-            <input type="date" name="data_exclusao" value="" data-bs-toggle="tooltip" data-bs-placement="top" title="Tome cuidado com esse campo!" />
+            <input type="date" name="data_exclusao" value="" data-bs-toggle="tooltip" data-bs-placement="top" title="Atenção ao editar esse campo, em caso de dúvidas entre em contato com o suporte" />
           </div>
         </div>
       </div>
@@ -179,7 +169,7 @@
           <input type="text" name="cep" placeholder="CEP" id="cep" />
         </div>
         <div class="col-6">
-          <input type="text" name="logradouro" placeholder="Logradouro"  />
+          <input type="text" name="logradouro" placeholder="Logradouro" id="logradouro"  />
         </div>
         <div class="col-2">
           <input type="text" name="numero" placeholder="Número" id="numero"  />

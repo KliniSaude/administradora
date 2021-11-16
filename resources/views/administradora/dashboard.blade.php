@@ -22,7 +22,7 @@
       </thead>
       <tbody>
         @foreach ($movements as $movement)
-          <tr class="table-{{ $movement->statusID == 5 ? 'warning' : ($movement->statusID == 4 ? 'info' : 'success') }}">
+          <tr class="table-{{ $movement->statusID == 5 ? 'warning' : 'light' }}">
             @if ($movement->data_inclusao)
             <th scope="row">
               <a href="{{ url('proposta', ['inclusao' => 'in.'.$movement->data_inclusao]) }}" rel="noopener noreferrer">IN{{ $movement->data_inclusao }}</a>
@@ -34,7 +34,12 @@
             @endif
             <td>{{ $movement->nome_entidade }}</td>
             <td>{{ $movement->data }}</td>
-            <td><i class="{{ $movement->statusID == 5 ? 'fas fa-exclamation-triangle text-warning' : ($movement->statusID == 4 ? 'fas fa-eye text-info' : 'fas fa-check-circle text-success') }}"></i> {{ $movement->status }}</td>
+            <td><i class="{{ $movement->statusID == 5 ? 'fas fa-exclamation-triangle text-warning' :
+                            ($movement->statusID == 4 ? 'fas fa-eye text-info' :
+                            ($movement->statusID == 1 ? 'fas fa-sign-out-alt text-primary' :
+                            ($movement->statusID == 7 ? 'fas fa-minus-circle text-danger' :
+                            ($movement->statusID == 2 ? 'fas fa-sync-alt text-secondary' :
+                            'fas fa-check-circle text-success')))) }}"></i> {{ $movement->status }}</td>
           </tr>
         @endforeach
       </tbody>

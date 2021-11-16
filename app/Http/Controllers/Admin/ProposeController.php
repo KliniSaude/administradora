@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Dependent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -28,8 +29,18 @@ class ProposeController extends Controller
     public function create()
     {
         $user = Auth::user()->name;
+        $entities = DB::table('administradora')
+                        ->join('users', 'users.fk_administradora', '=', 'administradora.id')
+                        ->join('entidade', 'entidade.fk_administradora', '=', 'administradora.id')
+                        ->join('vigencia', 'vigencia.id', '=', 'entidade.fk_vigencia')
+                        ->select('entidade.contrato', 'entidade.nome_entidade', 'vigencia.data')
+                        ->orderBy('entidade.nome_entidade')
+                        ->orderBy('vigencia.data')
+                        ->get();
+
         return view('administradora.cadastrar-proposta', [
-            'user' => $user
+            'user' => $user,
+            'entities' => $entities
         ]);
     }
 
@@ -45,7 +56,6 @@ class ProposeController extends Controller
         $propose = new Propose();
 
         $propose->fill($request->all());
-
         $propose->setDataInclusaoAttribute($request->data_inclusao);
         $propose->setDataExclusaoAttribute($request->data_exclusao);
         $propose->setNascimentoAttribute($request->nascimento);
@@ -53,6 +63,76 @@ class ProposeController extends Controller
         $propose->setFkUsuarioAttribute($user);
 
         $propose->save();
+
+        if ($request->codigo_dependencia){
+
+            foreach ($request->codigo_dependencia as $key => $codigo_dependencia) {
+                $dependentArray[$key]['codigo_dependencia'] = $codigo_dependencia;
+            }
+
+            foreach ($request->nome_dependente as $key => $nome_dependente) {
+                $dependentArray[$key]['nome_dependente'] = $nome_dependente;
+            }
+
+            foreach ($request->cpf_dependente as $key => $cpf_dependente) {
+                $dependentArray[$key]['cpf_dependente'] = $cpf_dependente;
+            }
+
+            foreach ($request->sexo_dependente as $key => $sexo_dependente) {
+                $dependentArray[$key]['sexo_dependente'] = $sexo_dependente;
+            }
+
+            foreach ($request->estado_civil_dependente as $key => $estado_civil_dependente) {
+                $dependentArray[$key]['estado_civil_dependente'] = $estado_civil_dependente;
+            }
+
+            foreach ($request->nascimento_dependente as $key => $nascimento_dependente) {
+                $dependentArray[$key]['nascimento_dependente'] = $nascimento_dependente;
+            }
+
+            foreach ($request->filiacao_dependente as $key => $filiacao_dependente) {
+                $dependentArray[$key]['filiacao_dependente'] = $filiacao_dependente;
+            }
+
+            foreach ($request->numero_unico_saude_dependente as $key => $numero_unico_saude_dependente) {
+                $dependentArray[$key]['numero_unico_saude_dependente'] = $numero_unico_saude_dependente;
+            }
+
+            foreach ($request->numero_dn_dependente as $key => $numero_dn_dependente) {
+                $dependentArray[$key]['numero_dn_dependente'] = $numero_dn_dependente;
+            }
+
+            foreach ($request->codigo_grupo_carencia_dependente as $key => $codigo_grupo_carencia_dependente) {
+                $dependentArray[$key]['codigo_grupo_carencia_dependente'] = $codigo_grupo_carencia_dependente;
+            }
+
+            foreach ($request->codigo_grupo_carencia_odonto_dependente as $key => $codigo_grupo_carencia_odonto_dependente) {
+                $dependentArray[$key]['codigo_grupo_carencia_odonto_dependente'] = $codigo_grupo_carencia_odonto_dependente;
+            }
+
+            foreach ($dependentArray as $key => $dependents) {
+                $id = $propose::select('id')
+                            ->where('email', $request->email)
+                            ->first();
+
+                $dependent =  new Dependent();
+
+                $dependent->codigo_dependencia = $dependents['codigo_dependencia'];
+                $dependent->nome_dependente = $dependents['nome_dependente'];
+                $dependent->cpf_dependente = $dependents['cpf_dependente'];
+                $dependent->sexo_dependente = $dependents['sexo_dependente'];
+                $dependent->estado_civil_dependente = $dependents['estado_civil_dependente'];
+                $dependent->nascimento_dependente = $dependents['nascimento_dependente'];
+                $dependent->filiacao_dependente = $dependents['filiacao_dependente'];
+                $dependent->numero_unico_saude_dependente = $dependents['numero_unico_saude_dependente'];
+                $dependent->numero_dn_dependente = $dependents['numero_dn_dependente'];
+                $dependent->codigo_grupo_carencia_dependente = $dependents['codigo_grupo_carencia_dependente'];
+                $dependent->codigo_grupo_carencia_odonto_dependente = $dependents['codigo_grupo_carencia_odonto_dependente'];
+                $dependent->fk_movimentacao_cadastral = $id->id;
+
+                $dependent->save();
+            }
+        }
 
         return redirect('dashboard')->with('message', 'Cadastrado com sucesso');
     }

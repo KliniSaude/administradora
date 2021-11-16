@@ -11404,54 +11404,6 @@ fieldset:disabled .btn {
   }
 }
 
-.alert {
-  position: relative;
-  padding: 1rem 1rem;
-  margin-bottom: 1rem;
-  border: 1px solid transparent;
-  border-radius: 0.25rem;
-}
-
-.alert-heading {
-  color: inherit;
-}
-
-.alert-link {
-  font-weight: 700;
-}
-
-.alert-dismissible {
-  padding-right: 3rem;
-}
-
-.alert-dismissible .btn-close {
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 2;
-  padding: 1.25rem 1rem;
-}
-
-.alert-klini-primary {
-  color: #145445;
-  background-color: #d6f6ef;
-  border-color: #c1f1e6;
-}
-
-.alert-klini-primary .alert-link {
-  color: #104337;
-}
-
-.alert-klini-secondary {
-  color: #597179;
-  background-color: #eaf2f4;
-  border-color: #dfebef;
-}
-
-.alert-klini-secondary .alert-link {
-  color: #475a61;
-}
-
 body {
   font-family: "aileron", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }

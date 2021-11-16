@@ -117,14 +117,14 @@ selectsTypeOperations.forEach(function (select) {
     }
 
     if (option == 1) {
-      reasonDelete.classList.add('d-none');
-      dateDelete.classList.add('d-none');
-      numberAssociate.classList.add('d-none');
+      reasonDelete.remove();
+      dateDelete.remove();
+      numberAssociate.remove();
       dateInclusion.classList.remove('d-none');
     }
 
     if (option == 2) {
-      dateInclusion.classList.add('d-none');
+      dateInclusion.remove();
       reasonDelete.classList.remove('d-none');
       dateDelete.classList.remove('d-none');
       numberAssociate.classList.remove('d-none');
@@ -140,9 +140,59 @@ function dateProccess(option) {
   var exclusion = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
   var now = new Date();
   var day = option;
-  now.setMonth(now.getMonth() + 2, 1);
+  now.setMonth(now.getMonth() + 1, 1);
   var month = now.getMonth();
   var years = now.getFullYear();
+
+  switch (month) {
+    case 0:
+      month = 1;
+      break;
+
+    case 1:
+      month = 2;
+      break;
+
+    case 2:
+      month = 3;
+      break;
+
+    case 3:
+      month = 4;
+      break;
+
+    case 4:
+      month = 5;
+      break;
+
+    case 5:
+      month = 6;
+      break;
+
+    case 6:
+      month = 7;
+      break;
+
+    case 7:
+      month = 8;
+      break;
+
+    case 8:
+      month = 9;
+      break;
+
+    case 9:
+      month = 10;
+      break;
+
+    case 10:
+      month = 11;
+      break;
+
+    case 11:
+      month = 12;
+      break;
+  }
 
   if (exclusion == true) {
     day = day == "01" ? "01" : day == "10" ? "0".concat(day - 1) : day == "20" ? day - 1 : '';
