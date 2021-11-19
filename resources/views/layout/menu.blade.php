@@ -31,11 +31,11 @@
                           href="{{ route('admin.create.proposta') }}">Nova
                           Proposta</a>
                   </li>
-                  <li class="nav-item">
+                  {{-- <li class="nav-item">
                       <a class="nav-link fw-bold text-secondary text-uppercase"
                           href="http://localhost:8080/views/administradora/cadastrar-proposta.php">Editar
                           Proposta</a>
-                  </li>
+                  </li> --}}
                   <hr>
                   <li class="nav-item">
                       <a class="nav-link fw-bold text-secondary text-uppercase"
