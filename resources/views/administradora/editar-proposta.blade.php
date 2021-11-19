@@ -213,7 +213,7 @@
                   <option value="8801" {{ $dependent->codigo_grupo_carencia_odonto_dependente == '8801' ? 'selected' : '' }}>ODONTOLOGICO CPA1</option>
                 </select>
                 <div class="action flex-grow-2">
-                  <input type="button" class="action-button bg-danger remover" value="Remover" />
+                  <input type="button" class="action-button bg-danger remover" id="removeDependent" data-remove="{{ $dependent->id }}" value="Remover" />
                 </div>
               </div>
               <hr>
