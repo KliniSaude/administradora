@@ -14,6 +14,15 @@
       <li>Plano</li>
     </ul>
 
+    @if ($errors->any())
+    <div class="col-6 my-3 mx-auto alert alert-success bg-danger text-white" role="alert">
+      <h4 class="alert-heading">Ooppss...</h4>
+      @foreach ($errors->all() as $error)
+      <p class="mb-0">{{ $error }}</p>
+      @endforeach
+    </div>
+    @endif
+
     <!-- fieldsets -->
     <!-- Operação -->
     <fieldset>
@@ -24,16 +33,16 @@
         <div class="col-6">
           <select name="codigo_tipo_operacao" id="codigo_tipo_operacao">
             <option value="">Tipo de Operação</option>
-            <option value="1">INCLUSÃO</option>
-            <option value="2">EXCLUSÃO</option>
-            <option value="3">SUSPENSÃO</option>
+            <option value="1" {{ old('codigo_tipo_operacao') == '1' ? 'selected' : '' }}>INCLUSÃO</option>
+            <option value="2" {{ old('codigo_tipo_operacao') == '2' ? 'selected' : '' }}>EXCLUSÃO</option>
+            <option value="3" {{ old('codigo_tipo_operacao') == '3' ? 'selected' : '' }}>SUSPENSÃO</option>
           </select>
         </div>
         <div class="col-6">
           <select name="fk_contrato" id="numero_contrato">
             <option value="">Contrato</option>
             @foreach ($entities as $entity)
-            <option value="{{ $entity->contrato }}" data-vigencia="{{ $entity->data }}" >{{ $entity->contrato }} - {{ $entity->nome_entidade }}</option>
+            <option value="{{ $entity->contrato }}" {{ old('fk_contrato') == $entity->contrato ? 'selected' : '' }} data-vigencia="{{ $entity->data }}" >{{ $entity->contrato }} - {{ $entity->nome_entidade }}</option>
             @endforeach
           </select>
         </div>
@@ -43,12 +52,12 @@
         <div class="col-6 d-none" id="motivo_exclusao">
           <select name="codigo_motivo_exclusao">
             <option>Motivo da Exclusão</option>
-            <option value="1">A pedido do beneficiário</option>
-            <option value="2">Fim da depenpendência a um Titular</option>
-            <option value="4">Exclusão por inadimplência</option>
-            <option value="5">Falecimento</option>
-            <option value="11">Exclusão por Portabilidade</option>
-            <option value="50">Motivo financeiro</option>
+            <option value="1" {{ old('codigo_motivo_exclusao') == '1' ? 'selected' : '' }}>A pedido do beneficiário</option>
+            <option value="2" {{ old('codigo_motivo_exclusao') == '2' ? 'selected' : '' }}>Fim da depenpendência a um Titular</option>
+            <option value="4" {{ old('codigo_motivo_exclusao') == '4' ? 'selected' : '' }}>Exclusão por inadimplência</option>
+            <option value="5" {{ old('codigo_motivo_exclusao') == '5' ? 'selected' : '' }}>Falecimento</option>
+            <option value="11" {{ old('codigo_motivo_exclusao') == '11' ? 'selected' : '' }}>Exclusão por Portabilidade</option>
+            <option value="50" {{ old('codigo_motivo_exclusao') == '50' ? 'selected' : '' }}>Motivo financeiro</option>
           </select>
         </div>
       </div>
@@ -56,17 +65,17 @@
         <div class="col d-none" id="data_inclusao">
           <div class="text-start">
             <label class="form-label text-uppercase">Data Inclusão</label>
-            <input type="date" name="data_inclusao" value="" />
+            <input type="date" name="data_inclusao" value="{{ old('data_inclusao') }}" />
           </div>
         </div>
         <div class="col d-none" id="data_exclusao">
           <div class="text-start">
             <label class="form-label text-uppercase">Data Exclusão</label>
-            <input type="date" name="data_exclusao" value="" data-bs-toggle="tooltip" data-bs-placement="top" title="Atenção ao editar esse campo, em caso de dúvidas entre em contato com o suporte" />
+            <input type="date" name="data_exclusao" value="{{ old('data_exclusao') }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Atenção ao editar esse campo, em caso de dúvidas entre em contato com o suporte" />
           </div>
         </div>
       </div>
-      <input type="button" name="next" class="next action-button" value="Próximo" />
+      <input type="button" name="next" class="next action-button" dusk="NextButtonStep1" value="Próximo" />
     </fieldset>
 
 
@@ -142,7 +151,7 @@
         </div>
       </div>
       <input type="button" name="previous" class="previous action-button" value="Anterior" />
-      <input type="button" name="next" class="next action-button" value="Próximo" />
+      <input type="button" name="next" class="next action-button" dusk="NextButtonStep2" value="Próximo" />
     </fieldset>
 
 
@@ -157,7 +166,7 @@
       </div>
       <input type="button" name="previous" class="previous action-button" value="Anterior" />
       <input type="button" class="action-button bg-secondary" id="btnAdicionarDependentes" value="Adicionar" />
-      <input type="button" name="next" class="next action-button" value="Próximo" />
+      <input type="button" name="next" class="next action-button" dusk="NextButtonStep3" value="Próximo" />
     </fieldset>
 
     <!-- Logradouro -->
@@ -166,31 +175,31 @@
       <h3 class="fs-subtitle">Informe seu endereço</h3>
       <div class="row">
         <div class="col-2">
-          <input type="text" name="cep" placeholder="CEP" id="cep" />
+          <input type="text" name="cep" placeholder="CEP" id="cep" value="{{ old('cep') }}" />
         </div>
         <div class="col-6">
-          <input type="text" name="logradouro" placeholder="Logradouro" id="logradouro"  />
+          <input type="text" name="logradouro" placeholder="Logradouro" id="logradouro" value="{{ old('logradouro') }}"  />
         </div>
         <div class="col-2">
-          <input type="text" name="numero" placeholder="Número" id="numero"  />
+          <input type="text" name="numero" placeholder="Número" id="numero" value="{{ old('numero') }}"  />
         </div>
         <div class="col-2">
-          <input type="text" name="complemento" placeholder="Complemento" id="complemento"  />
+          <input type="text" name="complemento" placeholder="Complemento" id="complemento" value="{{ old('complemento') }}"  />
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <input type="text" name="bairro" placeholder="Bairro" id="bairro"  />
+          <input type="text" name="bairro" placeholder="Bairro" id="bairro" value="{{ old('bairro') }}"  />
         </div>
         <div class="col">
-          <input type="text" name="cidade" placeholder="Cidade" id="cidade"  />
+          <input type="text" name="cidade" placeholder="Cidade" id="cidade" value="{{ old('cidade') }}" />
         </div>
         <div class="col">
-          <input type="text" name="estado" placeholder="Estado" id="uf"  />
+          <input type="text" name="estado" placeholder="Estado" id="uf" value="{{ old('estado') }}"  />
         </div>
       </div>
       <input type="button" name="previous" class="previous action-button" value="Anterior" />
-      <input type="button" name="next" class="next action-button" value="Próximo" />
+      <input type="button" name="next" class="next action-button" dusk="NextButtonStep4" value="Próximo" />
     </fieldset>
 
     <!-- Contato -->
@@ -209,7 +218,7 @@
         </div>
       </div>
       <input type="button" name="previous" class="previous action-button" value="Anterior" />
-      <input type="button" name="next" class="next action-button" value="Próximo" />
+      <input type="button" name="next" class="next action-button" dusk="NextButtonStep5" value="Próximo" />
     </fieldset>
 
     <!-- Plano -->
@@ -237,7 +246,7 @@
       </div>
 
       <input type="button" name="previous" class="previous action-button" value="Anterior" />
-      <input type="submit" class="submit action-button" value="Enviar" />
+      <input type="submit" class="submit action-button" dust="SendForm" value="Enviar" />
     </fieldset>
   </form>
 </div>

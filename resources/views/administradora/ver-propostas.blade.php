@@ -72,43 +72,46 @@
               <th scope="row">{{ $proposal->id }}</th>
               <td>{{ $proposal->nome_associado }}</td>
               <td>{{ $proposal->cpf }}</td>
-              <td>{{ $proposal->contrato }}</td>
+              <td>{{ $proposal->nome_entidade }}</td>
               <td>{{ $proposal->data }}</td>
               @if ($proposal->statusID == 5)
-              <td><a class="btn bg-warning text-white" href="" data-bs-toggle="modal" data-bs-target="#exampleModal" role="button">{{ $proposal->status }}</a></td>
+              <td><a class="btn bg-warning text-white" href="" data-bs-toggle="modal" data-bs-target="#_{{ $proposal->id }}" role="button">{{ $proposal->status }}</a></td>
               @else
               <td>{{ $proposal->status }}</td>
               @endif
-              <td>
-                <a class="btn btn-klini-primary text-white" href="" role="button"><i class="fas fa-edit"></i></a>
-                <a class="btn bg-danger text-white" id="delete" data-delete="" role="button"><i class="fas fa-trash-alt"></i></a>
+              <td class="d-flex align-items-center" height="89.5">
+                <a class="btn btn-klini-primary text-white" href="{{ route('admin.edit.proposta', $proposal->id) }}" role="button"><i class="fas fa-edit"></i></a>
+                <form action="{{ route('admin.destroy.proposta', $proposal->id) }}" method="post" class="mx-1">
+                  @csrf
+                  {{ method_field('DELETE') }}
+                  <button type="submit" class="btn bg-danger text-white" ><i class="fas fa-trash-alt"></i></button>
+                </form>
               </td>
             </tr>
+
+            <!-- Modal -->
+            <div class="modal fade" id="_{{ $proposal->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Correções a serem feitas:</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="form-floating">
+                      <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" disabled>{{ $proposal->mensagem }}</textarea>
+                      <label for="floatingTextarea2">Correções</label>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-klini-secondary text-white" data-bs-dismiss="modal">Fechar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           @endforeach
         </tbody>
       </table>
-    </div>
-  </div>
-</div>
-
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Correções a serem feitas:</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="form-floating">
-          <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" disabled>iaraiaraiara</textarea>
-          <label for="floatingTextarea2">Correções</label>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-klini-secondary text-white" data-bs-dismiss="modal">Fechar</button>
-      </div>
     </div>
   </div>
 </div>

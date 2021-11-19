@@ -15,9 +15,8 @@
       <thead>
         <tr>
           <th scope="col">PROTOCOLO</th>
-          <th scope="col">ENTIDADE</th>
-          <th scope="col">VIGÊNCIA</th>
-          <th scope="col">STATUS</th>
+          <th scope="col">ADMINISTRADORA</th>
+          <th scope="col">MÊS REFERÊNCIA</th>
         </tr>
       </thead>
       <tbody>
@@ -32,14 +31,12 @@
               <a href="{{ url('proposta', ['exclusao' => 'ex.'.$movement->data_exclusao]) }}" rel="noopener noreferrer">EX{{ $movement->data_exclusao }}</a>
             </th>
             @endif
-            <td>{{ $movement->nome_entidade }}</td>
-            <td>{{ $movement->data }}</td>
-            <td><i class="{{ $movement->statusID == 5 ? 'fas fa-exclamation-triangle text-warning' :
-                            ($movement->statusID == 4 ? 'fas fa-eye text-info' :
-                            ($movement->statusID == 1 ? 'fas fa-sign-out-alt text-primary' :
-                            ($movement->statusID == 7 ? 'fas fa-minus-circle text-danger' :
-                            ($movement->statusID == 2 ? 'fas fa-sync-alt text-secondary' :
-                            'fas fa-check-circle text-success')))) }}"></i> {{ $movement->status }}</td>
+            <td>{{ $movement->nome_empresa }}</td>
+            @if ($movement->data_inclusao)
+            <td>{{ $movement->data_inclusao }}</td>
+            @else
+            <td>{{ $movement->data_exclusao }}</td>
+            @endif
           </tr>
         @endforeach
       </tbody>

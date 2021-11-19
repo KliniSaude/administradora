@@ -229,6 +229,11 @@ var dependentes = [{
 
 function carregarDependentes() {
   var dependentes_container = document.querySelector(".main_dependente");
+
+  if (!dependentes_container) {
+    return;
+  }
+
   dependentes_container.innerHTML = "";
   dependentes.forEach(function (el) {
     var identificador = el.id;
@@ -351,23 +356,26 @@ var complement = document.querySelector("#complemento");
 var neighborhood = document.querySelector("#bairro");
 var city = document.querySelector("#cidade");
 var state = document.querySelector("#uf");
-zipcode.addEventListener('focusout', function () {
-  var endpoint = "https://viacep.com.br/ws/".concat(zipcode.value, "/json/");
-  var settings = {
-    method: 'GET',
-    redirect: 'follow'
-  };
-  fetch(endpoint, settings).then(function (response) {
-    return response.json();
-  }).then(function (result) {
-    address.value = result.logradouro;
-    neighborhood.value = result.bairro;
-    city.value = result.localidade;
-    state.value = result.uf;
-  })["catch"](function (error) {
-    return console.log('error', error);
+
+if (zipcode) {
+  zipcode.addEventListener('focusout', function () {
+    var endpoint = "https://viacep.com.br/ws/".concat(zipcode.value, "/json/");
+    var settings = {
+      method: 'GET',
+      redirect: 'follow'
+    };
+    fetch(endpoint, settings).then(function (response) {
+      return response.json();
+    }).then(function (result) {
+      address.value = result.logradouro;
+      neighborhood.value = result.bairro;
+      city.value = result.localidade;
+      state.value = result.uf;
+    })["catch"](function (error) {
+      return console.log('error', error);
+    });
   });
-});
+}
 
 /***/ }),
 

@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Propose extends Model
 {
+
+    use SoftDeletes;
+
     protected $table = "movimentacao_cadastral";
     protected $primaryKey = "id";
     public $timestamps = false;
@@ -73,8 +77,18 @@ class Propose extends Model
             return null;
         }
 
-        if (str_contains($param, '/')) {
+        if (str_contains($param, '-')) {
             return $param;
+        }
+
+        list($day, $month, $year) = explode('/', $param);
+        return (new \DateTime($day . '-' . $month . '-' . $year))->format('Y-m-d');
+    }
+
+    private function convertDateToString($param)
+    {
+        if (empty($param)) {
+            return null;
         }
 
         list($day, $month, $year) = explode('-', $param);

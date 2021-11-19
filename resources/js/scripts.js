@@ -131,6 +131,10 @@ let dependentes = [{
 
 function carregarDependentes() {
   let dependentes_container = document.querySelector(".main_dependente");
+  if (!dependentes_container) {
+    return;
+  }
+
   dependentes_container.innerHTML = "";
   dependentes.forEach((el) => {
     let identificador = el.id;
@@ -303,23 +307,25 @@ const neighborhood = document.querySelector("#bairro");
 const city = document.querySelector("#cidade");
 const state = document.querySelector("#uf");
 
-zipcode.addEventListener('focusout', () => {
+if (zipcode) {
+  zipcode.addEventListener('focusout', () => {
 
-  const endpoint = `https://viacep.com.br/ws/${zipcode.value}/json/`;
-  const settings = {
-    method: 'GET',
-    redirect: 'follow'
-  }
+    const endpoint = `https://viacep.com.br/ws/${zipcode.value}/json/`;
+    const settings = {
+      method: 'GET',
+      redirect: 'follow'
+    }
 
 
-  fetch(endpoint, settings)
-    .then(response => response.json())
-    .then(result => {
-      address.value = result.logradouro
-      neighborhood.value = result.bairro
-      city.value = result.localidade
-      state.value = result.uf
-    })
-    .catch(error => console.log('error', error));
+    fetch(endpoint, settings)
+      .then(response => response.json())
+      .then(result => {
+        address.value = result.logradouro
+        neighborhood.value = result.bairro
+        city.value = result.localidade
+        state.value = result.uf
+      })
+      .catch(error => console.log('error', error));
 
-})
+  });
+}

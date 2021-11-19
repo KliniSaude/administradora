@@ -26,8 +26,13 @@ Route::middleware(['auth'])->group(function () {
   /**
    * Proposta
    */
-  Route::get('nova-proposta', 'Admin\\ProposeController@create')->name('admin.create.proposta');
-  Route::post('/cadastrar', 'Admin\\ProposeController@store')->name('admin.store.proposta');
+  Route::get('/nova-proposta', 'Admin\\ProposeController@create')->name('admin.create.proposta');
+  Route::post('/store', 'Admin\\ProposeController@store')->name('admin.store.proposta');
+
+  Route::get('/editar-proposta/{id}', 'Admin\\ProposeController@edit')->name('admin.edit.proposta');
+  Route::put('/update/{id}', 'Admin\\ProposeController@update')->name('admin.update.proposta');
+
+  Route::delete('/deletar/{id}', 'Admin\\ProposeController@destroy')->name('admin.destroy.proposta');
 
 
 });
