@@ -75,11 +75,11 @@
               <td>{{ $proposal->nome_entidade }}</td>
               <td>{{ $proposal->data }}</td>
               @if ($proposal->statusID == 5)
-              <td><a class="btn bg-warning text-white" href="" data-bs-toggle="modal" data-bs-target="#_{{ $proposal->id }}" role="button">{{ $proposal->status }}</a></td>
+              <td><a class="btn bg-warning text-white" href="" data-bs-toggle="modal" data-bs-target="#_{{ $proposal->id }}" role="button"><i class="fas fa-exclamation-triangle"></i> {{ $proposal->status }}</a></td>
               @else
               <td>{{ $proposal->status }}</td>
               @endif
-              <td class="d-flex align-items-center" height="89.5">
+              <td class="d-flex align-items-center">
                 <a class="btn btn-klini-primary text-white" href="{{ route('admin.edit.proposta', $proposal->id) }}" role="button"><i class="fas fa-edit"></i></a>
                 <form action="{{ route('admin.destroy.proposta', $proposal->id) }}" method="post" class="mx-1">
                   @csrf
