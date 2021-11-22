@@ -44,7 +44,7 @@
                   <hr>
                   <li class="nav-item">
                       <a class="nav-link fw-bold text-secondary text-uppercase"
-                          href="http://localhost:8080/views/log/log.php">Log de movimentação</a>
+                          href="{{ route('admin.log') }}">Log de movimentação</a>
                   </li>
                   <hr>
                   <li class="nav-item">
