@@ -377,38 +377,6 @@ if (zipcode) {
   });
 }
 
-var btnRemove = document.querySelectorAll('#removeDependent');
-
-if (btnRemove) {
-  btnRemove.forEach(function (item) {
-    item.addEventListener('click', function () {
-      var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-      var url = '/Admin/DependentController.php';
-      var method = 'PUT';
-      var settings = {
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json, text-plain, */*",
-          "X-Requested-With": "XMLHttpRequest",
-          "X-CSRF-TOKEN": token
-        },
-        method: method,
-        credentials: "same-origin",
-        body: JSON.stringify({
-          id: item.getAttribute('data-remove')
-        })
-      };
-      fetch(url, settings).then(function (response) {
-        return response.text();
-      }).then(function (data) {
-        console.log(data);
-      })["catch"](function (error) {
-        return console.log('error', error);
-      });
-    });
-  });
-}
-
 /***/ }),
 
 /***/ 2:

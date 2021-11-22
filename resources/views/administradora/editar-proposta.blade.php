@@ -161,6 +161,11 @@
       <h2 class="fs-title"><i class="fas fa-users"></i> Dados do Dependente</h2>
       <h3 class="fs-subtitle">Informe os dados do dependente se houver</h3>
       <div class="row">
+
+        <div class="alert alert-success bg-success text-white d-none" id="message" role="alert">
+
+        </div>
+
         <div class="">
           @if (!isset($dependents))
           <div class="main_dependente">

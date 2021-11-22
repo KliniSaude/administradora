@@ -179,9 +179,12 @@ class ProposeController extends Controller
                             ->get();
         }
 
+        $dependents = Dependent::where('fk_movimentacao_cadastral', 43)->get();
+
         return view('administradora.ver-propostas', [
             'user' => $user,
-            'proposals' => $proposals
+            'proposals' => $proposals,
+            'dependents' => $dependents
         ]);
     }
 
@@ -322,6 +325,18 @@ class ProposeController extends Controller
         $propose->delete();
 
         return redirect('dashboard')->with('message', 'Proposta deletada com sucesso!');
+    }
+
+    public function destroyDependent(Request $request)
+    {
+        $dependent = Dependent::find($request->id);
+
+        $dependent->delete();
+
+        $return['message'] = "O {$dependent->nome_dependente}, foi deletado com sucesso!";
+
+        echo json_encode($return);
+        return;
     }
 
     public function dashboard()

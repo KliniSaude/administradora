@@ -33,6 +33,7 @@ Route::middleware(['auth'])->group(function () {
   Route::put('/update/{id}', 'Admin\\ProposeController@update')->name('admin.update.proposta');
 
   Route::delete('/deletar/{id}', 'Admin\\ProposeController@destroy')->name('admin.destroy.proposta');
+  Route::post('deletar-depedente', 'Admin\\ProposeController@destroyDependent')->name('admin.destroyDependent.proposta');
 
 
 });

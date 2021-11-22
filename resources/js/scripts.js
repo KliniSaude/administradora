@@ -330,35 +330,4 @@ if (zipcode) {
   });
 }
 
-const btnRemove = document.querySelectorAll('#removeDependent');
-if (btnRemove) {
-  btnRemove.forEach(item => {
-    item.addEventListener('click', () => {
-      const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-      const url = '/Admin/DependentController.php';
-      const method = 'PUT';
-
-      const settings = {
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json, text-plain, */*",
-          "X-Requested-With": "XMLHttpRequest",
-          "X-CSRF-TOKEN": token
-        },
-        method: method,
-        credentials: "same-origin",
-        body: JSON.stringify({id: item.getAttribute('data-remove')})
-      }
-
-      fetch(url, settings)
-      .then(response => response.text())
-      .then(data => {
-        console.log(data)
-      })
-      .catch( error => console.log('error', error) )
-
-    })
-  })
-}
-
 
