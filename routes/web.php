@@ -16,12 +16,22 @@
  */
 Route::get('/', 'LoginController@showLoginForm')->name('admin.login');
 Route::post('/login/do', 'LoginController@login')->name('admin.login.do');
+
+/**
+ * Middleware
+ */
 Route::middleware(['auth'])->group(function () {
   /**
    * DASHBOARD
    */
   Route::get('/dashboard', 'Admin\\ProposeController@dashboard')->name('admin.dashboard');
   Route::get('/proposta/{id}', 'Admin\\ProposeController@show')->name('admin.propostas');
+
+  /**
+   * USER
+   */
+  Route::get('usuario/', 'Admin\\UserController@index')->name('admin.user');
+  Route::put('usuario-update/{id}', 'Admin\\UserController@update')->name('admin.user.update');
 
   /**
    * Proposta
@@ -33,7 +43,12 @@ Route::middleware(['auth'])->group(function () {
   Route::put('/update/{id}', 'Admin\\ProposeController@update')->name('admin.update.proposta');
 
   Route::delete('/deletar/{id}', 'Admin\\ProposeController@destroy')->name('admin.destroy.proposta');
-  Route::post('deletar-depedente', 'Admin\\ProposeController@destroyDependent')->name('admin.destroyDependent.proposta');
+  Route::post('deletar-depedente/', 'Admin\\ProposeController@destroyDependent')->name('admin.destroyDependent.proposta');
+
+  /**
+   * Log
+   */
+  Route::get('/log', 'Admin\\LogController@index')->name('admin.log');
 
 
 });

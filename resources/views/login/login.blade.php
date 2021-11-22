@@ -14,7 +14,7 @@
               <label for="floatingInput">E-mail</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="password" class="form-control" id="floatingPassword" name="password" value="admin123456" placeholder="******">
+              <input type="password" class="form-control" id="floatingPassword" name="password" value="21831440" placeholder="******">
               <label for="floatingPassword">Senha</label>
             </div>
             @if ($errors->all())

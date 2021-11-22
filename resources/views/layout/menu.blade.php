@@ -13,9 +13,9 @@
           aria-labelledby="offcanvasExampleLabel">
           <div class="offcanvas-header justify-content-around">
               <!-- <span><i class="fas fa-user fs-3"></i></span> -->
-              <img src="{{ url('storage/img/logos/perfil-female.png') }}" alt="Profile User" width="60px">
-              <h5 class="offcanvas-title" id="offcanvasExampleLabel"> {{ $user }} <br> <span
-                      class="text-uppercase text-muted fw-light" style="font-size: 12px;">administradora</span>
+              <img src="{{ $users->profile_photo != NULL ? asset($users->profile_photo) : asset('storage/img/logos/perfil-female.png') }}" alt="Profile User" width="60px">
+              <h5 class="offcanvas-title" id="offcanvasExampleLabel"> {{ $user }} <br>
+                <small class="text-uppercase text-muted fw-light" style="font-size: 12px;">administradora</small>
               </h5>
               <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                   aria-label="Close"></button>
@@ -39,7 +39,7 @@
                   <hr>
                   <li class="nav-item">
                       <a class="nav-link fw-bold text-secondary text-uppercase"
-                          href="http://localhost:8080/views/usuario/usuario.php">Usuário</a>
+                          href="{{ route('admin.user') }}">Usuário</a>
                   </li>
                   <hr>
                   <li class="nav-item">

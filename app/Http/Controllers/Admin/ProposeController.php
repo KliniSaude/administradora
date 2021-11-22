@@ -31,7 +31,7 @@ class ProposeController extends Controller
      */
     public function create()
     {
-        $user = Auth::user()->name;
+        $user = Auth::user();
         $entities = DB::table('administradora')
                         ->join('users', 'users.fk_administradora', '=', 'administradora.id')
                         ->join('entidade', 'entidade.fk_administradora', '=', 'administradora.id')
@@ -42,7 +42,8 @@ class ProposeController extends Controller
                         ->get();
 
         return view('administradora.cadastrar-proposta', [
-            'user' => $user,
+            'user' => $user->name,
+            'users' => $user,
             'entities' => $entities
         ]);
     }
@@ -150,7 +151,7 @@ class ProposeController extends Controller
         $id = explode('.', $id);
         $month = explode('-', $id[1]);
 
-        $user = Auth::user()->name;
+        $user = Auth::user();
 
         if ($id[0] == 'in') {
             $proposals = DB::table('movimentacao_cadastral')
@@ -182,7 +183,8 @@ class ProposeController extends Controller
         $dependents = Dependent::where('fk_movimentacao_cadastral', 43)->get();
 
         return view('administradora.ver-propostas', [
-            'user' => $user,
+            'user' => $user->name,
+            'users' => $user,
             'proposals' => $proposals,
             'dependents' => $dependents
         ]);
@@ -196,7 +198,7 @@ class ProposeController extends Controller
      */
     public function edit($id)
     {
-        $user = Auth::user()->name;
+        $user = Auth::user();
         $entities = DB::table('administradora')
                         ->join('users', 'users.fk_administradora', '=', 'administradora.id')
                         ->join('entidade', 'entidade.fk_administradora', '=', 'administradora.id')
@@ -210,7 +212,8 @@ class ProposeController extends Controller
         $dependents = Dependent::where('fk_movimentacao_cadastral', $id)->get();
 
         return view('administradora.editar-proposta', [
-            'user' => $user,
+            'user' => $user->name,
+            'users' => $user,
             'entities' => $entities,
             'propose' => $propose,
             'dependents' => $dependents
@@ -341,7 +344,7 @@ class ProposeController extends Controller
 
     public function dashboard()
     {
-        $user = Auth::user()->name;
+        $user = Auth::user();
 
         $movements = DB::table('movimentacao_cadastral')
                         ->groupByRaw('substring(movimentacao_cadastral.created_at, "-", 2)')
@@ -355,7 +358,8 @@ class ProposeController extends Controller
 
         if (Auth::check() === true) {
            return view('administradora.dashboard', [
-               'user' => $user,
+                'user' => $user->name,
+                'users' => $user,
                 'movements' => $movements
            ]);
         }
