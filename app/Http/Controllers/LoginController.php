@@ -24,7 +24,13 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-           return redirect()->route('admin.dashboard');
+            if (Auth::user()->user_type == 0) {
+                return redirect()->route('admin.dashboard');
+            }
+
+            if (Auth::user()->user_type == 1) {
+                return redirect()->route('operadora.dashboard');
+            }
         }
 
         return redirect()->back()->withErrors(['E-mail ou senha não conferem!']);

@@ -21,6 +21,10 @@ Route::post('/login/do', 'LoginController@login')->name('admin.login.do');
  * Middleware
  */
 Route::middleware(['auth'])->group(function () {
+
+  /**
+   * Administradora
+   */
   /**
    * DASHBOARD
    */
@@ -49,6 +53,15 @@ Route::middleware(['auth'])->group(function () {
    * Log
    */
   Route::get('/log', 'Admin\\LogController@index')->name('admin.log');
+
+  /**
+   * Operadora
+   */
+  /**
+   * DASHBOARD
+   */
+  Route::get('/dashboard-operacao', 'Operadora\\ProposeController@index')->name('operadora.dashboard');
+  Route::get('/proposta/{id}', 'Operadora\\ProposeController@show')->name('operadora.propostas');
 
 
 });

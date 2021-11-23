@@ -10,7 +10,7 @@
           <form action="{{ route('admin.login.do') }}" method="POST">
             @csrf
             <div class="form-floating mb-3">
-              <input type="email" class="form-control" id="floatingInput" name="email" value="moises.fausto@klinisaude.com.br" placeholder="nome@example.com.br">
+              <input type="email" class="form-control" id="floatingInput" name="email" value="alexandre.braganca@klinisaude.com.br" placeholder="nome@example.com.br">
               <label for="floatingInput">E-mail</label>
             </div>
             <div class="form-floating mb-3">
