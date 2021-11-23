@@ -50,7 +50,7 @@
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <div class="col-md-12">
-      <table class="table">
+      <table class="table align-middle table-striped table-bordered">
         <thead>
           <tr>
             <th scope="col"></th>
@@ -65,50 +65,80 @@
         </thead>
         <tbody>
           @foreach ($proposals as $proposal)
-            <tr>
-              <th scope="row">
-                <input class="form-check-input export_selected" type="checkbox" value="" name="" id="">
-              </th>
-              <th scope="row">{{ $proposal->id }}</th>
-              <td>{{ $proposal->nome_associado }}</td>
-              <td>{{ $proposal->cpf }}</td>
-              <td>{{ $proposal->nome_entidade }}</td>
-              <td>{{ $proposal->data }}</td>
-              @if ($proposal->statusID == 5)
-              <td><a class="btn bg-warning text-white" href="" data-bs-toggle="modal" data-bs-target="#_{{ $proposal->id }}" role="button"><i class="fas fa-exclamation-triangle"></i> {{ $proposal->status }}</a></td>
-              @else
-              <td>{{ $proposal->status }}</td>
-              @endif
-              <td class="d-flex align-items-center">
-                <a class="btn btn-klini-primary text-white" href="{{ route('admin.edit.proposta', $proposal->id) }}" role="button"><i class="fas fa-edit"></i></a>
-                <form action="{{ route('admin.destroy.proposta', $proposal->id) }}" method="post" class="mx-1">
-                  @csrf
-                  {{ method_field('DELETE') }}
-                  <button type="submit" class="btn bg-danger text-white" ><i class="fas fa-trash-alt"></i></button>
-                </form>
-              </td>
-            </tr>
+          <tr>
+            <th scope="row">
+              <input class="form-check-input export_selected" type="checkbox" value="" name="" id="">
+            </th>
+            <th scope="row">{{ $proposal->id }}</th>
+            <td>{{ $proposal->nome_associado }}</td>
+            <td>{{ $proposal->cpf }}</td>
+            <td>{{ $proposal->nome_entidade }}</td>
+            <td>{{ $proposal->data }}</td>
+            @if ($proposal->statusID == 5)
+            <td><a class="btn bg-warning text-white" href="" data-bs-toggle="modal" data-bs-target="#_{{ $proposal->id }}"
+                role="button"><i class="fas fa-exclamation-triangle"></i> {{ $proposal->status }}</a></td>
+            @else
+            <td>{{ $proposal->status }}</td>
+            @endif
+            <td class="d-flex align-items-center">
+              <a class="btn btn-klini-primary text-white" href="{{ route('admin.edit.proposta', $proposal->id) }}"
+                role="button"><i class="fas fa-edit"></i></a>
+              <form action="{{ route('admin.destroy.proposta', $proposal->id) }}" method="post" class="mx-1">
+                @csrf
+                {{ method_field('DELETE') }}
+                <button type="submit" class="btn bg-danger text-white"><i class="fas fa-trash-alt"></i></button>
+              </form>
+            </td>
+          </tr>
 
-            <!-- Modal -->
-            <div class="modal fade" id="_{{ $proposal->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Correções a serem feitas:</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <!-- Dependentes -->
+          @if ($dependents)
+          <tr>
+            <td colspan="10">
+              <table class="table align-middle mb-0">
+                <thead>
+                  <tr>
+                    <th scope="col"><i class="fas fa-arrow-up"></i> NOME DEPENDENTE <i class="fad fa-level-up"></i></th>
+                    <th scope="col">CPF DEPENDENTE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach ($dependents as $dependent)
+                    @if ($dependent->fk_movimentacao_cadastral == $proposal->id)
+                      <tr>
+                        <td>{{ $dependent->nome_dependente }}</td>
+                        <td>{{ $dependent->cpf_dependente }}</td>
+                      </tr>
+                    @endif
+                  @endforeach
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          @endif
+
+          <!-- Modal -->
+          <div class="modal fade" id="_{{ $proposal->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Correções a serem feitas:</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="form-floating">
+                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                      style="height: 100px" disabled>{{ $proposal->mensagem }}</textarea>
+                    <label for="floatingTextarea2">Correções</label>
                   </div>
-                  <div class="modal-body">
-                    <div class="form-floating">
-                      <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" disabled>{{ $proposal->mensagem }}</textarea>
-                      <label for="floatingTextarea2">Correções</label>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-klini-secondary text-white" data-bs-dismiss="modal">Fechar</button>
-                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-klini-secondary text-white" data-bs-dismiss="modal">Fechar</button>
                 </div>
               </div>
             </div>
+          </div>
           @endforeach
         </tbody>
       </table>

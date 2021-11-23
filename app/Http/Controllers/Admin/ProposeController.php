@@ -180,7 +180,11 @@ class ProposeController extends Controller
                             ->get();
         }
 
-        $dependents = Dependent::where('fk_movimentacao_cadastral', 43)->get();
+        $dependents = DB::table('movimentacao_cadastral')
+                        ->join('movimentacao_cadastral_dependentes', 'movimentacao_cadastral.id', '=', 'movimentacao_cadastral_dependentes.fk_movimentacao_cadastral')
+                        ->select('movimentacao_cadastral_dependentes.id', 'movimentacao_cadastral_dependentes.nome_dependente',
+                                'movimentacao_cadastral_dependentes.cpf_dependente', 'movimentacao_cadastral_dependentes.fk_movimentacao_cadastral')
+                        ->get();
 
         return view('administradora.ver-propostas', [
             'user' => $user->name,
