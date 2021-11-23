@@ -356,6 +356,7 @@ class ProposeController extends Controller
                         ->join('administradora', 'administradora.id', '=', 'entidade.fk_administradora')
                         ->join('vigencia', 'entidade.fk_vigencia', '=', 'vigencia.id')
                         ->join('status', 'movimentacao_cadastral.fk_status', '=', 'status.id')
+                        ->where('movimentacao_cadastral.fk_usuario', $user->id)
                         ->select('movimentacao_cadastral.id', 'movimentacao_cadastral.data_inclusao',
                         'data_exclusao', 'administradora.nome_empresa', 'entidade.nome_entidade', 'vigencia.data', 'status.id AS statusID', 'status.status')
                         ->paginate(10);
