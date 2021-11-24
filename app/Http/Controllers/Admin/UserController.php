@@ -7,8 +7,8 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -25,7 +25,7 @@ class UserController extends Controller
                             ->select('administradora.nome_empresa')
                             ->first();
 
-        return view('usuario.cadastro', [
+        return view('usuario.edit', [
             'user' => $user->name,
             'users' => $user,
             'administrator' => $administrator
@@ -39,7 +39,16 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $user = Auth::user();
+        $administrators = DB::table('administradora')
+                            ->select('id', 'nome_empresa', 'cnpj')
+                            ->get();
+
+        return view('usuario.create', [
+            'user' => $user->name,
+            'users' => $user,
+            'administrators' => $administrators
+        ]);
     }
 
     /**
@@ -48,9 +57,23 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $user = new User();
+        $user->fill($request->all());
+        $user->password = bcrypt($request->password);
+
+        if ($request->file('profile_photo')) {
+            $userPath = Str::slug($user->name);
+            $nameProfile = $request->file('profile_photo')->getClientOriginalName();
+            $path = $request->file('profile_photo')->storeAs('public/' . $userPath . '/profile', $nameProfile);
+
+            $user->profile_photo = 'storage/' . $userPath . '\\profile\\' . $nameProfile;
+        }
+
+        $user->save();
+
+        return redirect()->route('admin.user')->with('Usuário criado com sucesso!');
     }
 
     /**
@@ -82,13 +105,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
-
-        $validator = Validator::make($request->all(), [
-            'password' => 'required|min:6',
-            'profile_photo' => 'image|mimes:jpeg,png,jpg|max:2048'
-        ]);
 
         $user = User::find($id)->first();
         $user->fill($request->all());
@@ -102,15 +120,9 @@ class UserController extends Controller
             $user->profile_photo = 'storage/' . $userPath . '\\profile\\' . $nameProfile ;
         }
 
-        if ($validator->fails()) {
-            return redirect()->route('admin.user')
-                        ->withErrors($validator)
-                        ->withInput();
-        }
-
         $user->save();
 
-        return redirect()->route('admin.user')->with('message', 'Perfil atualizado com sucesso!');
+        return redirect()->route('admin.user')->with('Atualizado com sucesso!');
     }
 
     /**

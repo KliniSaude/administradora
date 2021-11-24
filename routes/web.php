@@ -63,6 +63,13 @@ Route::middleware(['auth'])->group(function () {
   Route::get('/dashboard-operacao', 'Operadora\\ProposeController@index')->name('operadora.dashboard');
   Route::get('/proposta/{id}', 'Operadora\\ProposeController@show')->name('operadora.propostas');
 
+  /**
+   * USER
+   */
+  Route::get('/usuarios', 'Admin\\UserController@allUsers')->name('operadora.users.all');
+  Route::get('/criar-usuario', 'Admin\\UserController@create')->name('operadora.users.create');
+  Route::post('/store-user', 'Admin\\UserController@store')->name('operadora.users.store');
+
 
 });
 /**

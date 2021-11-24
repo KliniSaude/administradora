@@ -16,7 +16,7 @@
                 <img src="{{ $users->profile_photo != NULL ? asset($users->profile_photo) : asset('storage/img/logos/perfil-female.png') }}"
                     alt="Profile User" width="60px">
                 <h5 class="offcanvas-title" id="offcanvasExampleLabel"> {{ $user }} <br>
-                    <small class="text-uppercase text-muted fw-light" style="font-size: 12px;">administradora</small>
+                    <small class="text-uppercase text-muted fw-light" style="font-size: 12px;"> {{ $users->user_type == 0 ? 'administradora' : 'operadora' }}</small>
                 </h5>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                     aria-label="Close"></button>
@@ -50,7 +50,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link fw-bold text-secondary text-uppercase"
-                            href="{{ route('admin.user') }}">Criar Usuários</a>
+                            href="{{ route('operadora.users.create') }}">Criar Usuários</a>
                     </li>
                     @endif
                     <hr>
