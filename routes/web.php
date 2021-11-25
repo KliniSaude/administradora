@@ -69,7 +69,8 @@ Route::middleware(['auth'])->group(function () {
   Route::get('/usuarios', 'Admin\\UserController@allUsers')->name('operadora.users.all');
   Route::get('/criar-usuario', 'Admin\\UserController@create')->name('operadora.users.create');
   Route::post('/store-user', 'Admin\\UserController@store')->name('operadora.users.store');
-
+  Route::get('editar-usuario/{id}', 'Admin\\UserController@edit')->name('operadora.users.edit');
+  Route::delete('/deletar-usuario/{id}', 'Admin\\UserController@destroy')->name('operadora.users.delete');
 
 });
 /**

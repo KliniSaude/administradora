@@ -187,7 +187,7 @@ class ProposeController extends Controller
                         ->get();
 
         return view('administradora.ver-propostas', [
-            'user' => $user->name,
+            'user' => $user,
             'users' => $user,
             'proposals' => $proposals,
             'dependents' => $dependents
@@ -216,7 +216,7 @@ class ProposeController extends Controller
         $dependents = Dependent::where('fk_movimentacao_cadastral', $id)->get();
 
         return view('administradora.editar-proposta', [
-            'user' => $user->name,
+            'user' => $user,
             'users' => $user,
             'entities' => $entities,
             'propose' => $propose,
@@ -363,7 +363,7 @@ class ProposeController extends Controller
 
         if (Auth::check() === true) {
            return view('administradora.dashboard', [
-                'user' => $user->name,
+                'user' => $user,
                 'users' => $user,
                 'movements' => $movements
            ]);

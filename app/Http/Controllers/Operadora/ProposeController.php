@@ -30,7 +30,7 @@ class ProposeController extends Controller
 
         if (Auth::check() === true) {
            return view('administradora.dashboard', [
-                'user' => $user->name,
+                'user' => $user,
                 'users' => $user,
                 'movements' => $movements
            ]);

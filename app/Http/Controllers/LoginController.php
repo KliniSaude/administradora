@@ -23,7 +23,7 @@ class LoginController extends Controller
 
         $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials) && Auth::user()->status == 1) {
             if (Auth::user()->user_type == 0) {
                 return redirect()->route('admin.dashboard');
             }

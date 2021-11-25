@@ -13,10 +13,10 @@
             aria-labelledby="offcanvasExampleLabel">
             <div class="offcanvas-header justify-content-around">
                 <!-- <span><i class="fas fa-user fs-3"></i></span> -->
-                <img src="{{ $users->profile_photo != NULL ? asset($users->profile_photo) : asset('storage/img/logos/perfil-female.png') }}"
+                <img class="rounded-circle" width="70px" height="70px" src="{{ $user->profile_photo != NULL ? asset($user->profile_photo) : asset('storage/img/logos/perfil-female.png') }}"
                     alt="Profile User" width="60px">
-                <h5 class="offcanvas-title" id="offcanvasExampleLabel"> {{ $user }} <br>
-                    <small class="text-uppercase text-muted fw-light" style="font-size: 12px;"> {{ $users->user_type == 0 ? 'administradora' : 'operadora' }}</small>
+                <h5 class="offcanvas-title" id="offcanvasExampleLabel"> {{ $user->name }} <br>
+                    <small class="text-uppercase text-muted fw-light" style="font-size: 12px;"> {{ $user->user_type == 0 ? 'administradora' : 'operadora' }}</small>
                 </h5>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                     aria-label="Close"></button>
@@ -25,7 +25,7 @@
                 <ul class="nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link fw-bold text-secondary text-uppercase active" aria-current="page"
-                            href="{{ $users->user_type == 0 ? route('admin.dashboard') : route('operadora.dashboard') }}">Ver
+                            href="{{ $user->user_type == 0 ? route('admin.dashboard') : route('operadora.dashboard') }}">Ver
                             Propostas</a>
                     </li>
                     <li class="nav-item">
@@ -43,10 +43,10 @@
                         <a class="nav-link fw-bold text-secondary text-uppercase"
                             href="{{ route('admin.user') }}">Meu Usuário</a>
                     </li>
-                    @if ($users->user_type == 1)
+                    @if ($user->user_type == 1)
                     <li class="nav-item">
                         <a class="nav-link fw-bold text-secondary text-uppercase"
-                            href="{{ route('admin.user') }}">Ver Usuários</a>
+                            href="{{ route('operadora.users.all') }}">Ver Usuários</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link fw-bold text-secondary text-uppercase"

@@ -23,9 +23,11 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
+        $id = $this->route()->parameter('id');
+
         return [
             "name" => "required|min:3|max:15",
-            "email" => "required|email|unique:users,email",
+            "email" => "required|email|unique:users,email,{$id}",
             "password" => "required|min:6",
             'profile_photo' => 'image|mimes:jpeg,png,jpg|max:2048'
         ];

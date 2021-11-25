@@ -1,7 +1,7 @@
 @extends('layout.main')
 @section('content')
 <div class="container vh-100">
-  <h2 class="my-4 text-secondary">Olá, {{ $user }}. Seja muito bem vindo! <br> Aqui você escolhe a movimentação e em seguida <br>  o sistema irá redireciona-lo para a tela das propostas.</h2>
+  <h2 class="my-4 text-secondary">Olá, {{ $users->name }}. Seja muito bem vindo! <br> Aqui você escolhe a movimentação e em seguida <br>  o sistema irá redireciona-lo para a tela das propostas.</h2>
   <div class="row justify-content-center my-5">
 
     @if (session()->has('message'))

@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -26,7 +27,7 @@ class UserController extends Controller
                             ->first();
 
         return view('usuario.edit', [
-            'user' => $user->name,
+            'user' => $user,
             'users' => $user,
             'administrator' => $administrator
         ]);
@@ -45,7 +46,7 @@ class UserController extends Controller
                             ->get();
 
         return view('usuario.create', [
-            'user' => $user->name,
+            'user' => $user,
             'users' => $user,
             'administrators' => $administrators
         ]);
@@ -61,6 +62,7 @@ class UserController extends Controller
     {
         $user = new User();
         $user->fill($request->all());
+        $user->setStatusAttribute($request->status);
         $user->password = bcrypt($request->password);
 
         if ($request->file('profile_photo')) {
@@ -73,7 +75,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect()->route('admin.user')->with('Usuário criado com sucesso!');
+        return redirect()->route('operadora.users.all')->with('message', 'Usuário criado com sucesso!');
     }
 
     /**
@@ -95,7 +97,18 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = Auth::user();
+
+        $users = User::find($id);
+        $administrators = DB::table('administradora')
+                            ->select('id', 'nome_empresa', 'cnpj')
+                            ->get();
+
+        return view('usuario.editUser', [
+            'user' => $user,
+            'users' => $users,
+            'administrators' => $administrators
+        ]);
     }
 
     /**
@@ -108,8 +121,10 @@ class UserController extends Controller
     public function update(UserRequest $request, $id)
     {
 
-        $user = User::find($id)->first();
+        $user = User::find($id);
+
         $user->fill($request->all());
+        $user->setStatusAttribute($request->status);
         $user->password = bcrypt($request->password);
 
         if ($request->file('profile_photo')) {
@@ -122,7 +137,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect()->route('admin.user')->with('Atualizado com sucesso!');
+        return redirect()->route('operadora.users.all')->with('message', 'Atualizado com sucesso!');
     }
 
     /**
@@ -133,6 +148,31 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+
+        return redirect()->route('operadora.users.all')->with('message', 'Usuário excluido com sucesso!');
+    }
+
+    public function allUsers()
+    {
+        $user = Auth::user();
+        $administrators = DB::table('administradora')
+                            ->select('id', 'nome_empresa', 'cnpj')
+                            ->get();
+
+        $usersAdministrators = DB::table('users')
+                                ->join('administradora', 'administradora.id', '=', 'users.fk_administradora')
+                                ->where('users.user_type', 0)
+                                ->whereNull('deleted_at')
+                                ->select('users.id', 'users.name', 'users.email', 'users.status', 'administradora.nome_empresa')
+                                ->paginate(15);
+
+        return view('usuario.users', [
+            'user' => $user,
+            'users' => $user,
+            'administrators' => $administrators,
+            'usersAdministrators' => $usersAdministrators
+        ]);
     }
 }
