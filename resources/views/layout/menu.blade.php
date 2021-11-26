@@ -13,7 +13,7 @@
             aria-labelledby="offcanvasExampleLabel">
             <div class="offcanvas-header justify-content-around">
                 <!-- <span><i class="fas fa-user fs-3"></i></span> -->
-                <img class="rounded-circle" width="70px" height="70px" src="{{ $user->profile_photo != NULL ? asset($user->profile_photo) : asset('storage/img/logos/perfil-female.png') }}"
+                <img class="rounded-circle" src="{{ $user->profile_photo != NULL ? asset($user->profile_photo) : asset('storage/img/logos/perfil-female.png') }}"
                     alt="Profile User" width="60px">
                 <h5 class="offcanvas-title" id="offcanvasExampleLabel"> {{ $user->name }} <br>
                     <small class="text-uppercase text-muted fw-light" style="font-size: 12px;"> {{ $user->user_type == 0 ? 'administradora' : 'operadora' }}</small>

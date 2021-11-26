@@ -3,7 +3,6 @@
 <div class="container vh-100">
   <form action="{{ route('operadora.users.store') }}" method="POST" enctype="multipart/form-data" class="row justify-content-center g-3">
     @csrf
-    <input type="hidden" name="user_type" value="0">
     @if ($errors->any())
       @foreach ($errors->all() as $error)
       <div class="alert alert-danger bg-danger text-white alert-dismissible fade show" role="alert">
@@ -25,6 +24,22 @@
         <div class="d-flex flex-column justify-content-center align-items-center">
           <img src="{{ asset('storage/img/logos/perfil-female.png') }}" style="width: 210px;">
         </div>
+      </div>
+      <div class="col-12 mb-5">
+        <p>Tipo de Usuário</p>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="user_type" value="0" {{ old('user_type') == '0' ? 'checked' : '' }} id="user_type">
+          <label class="form-check-label" for="status">
+            ADMINISTRADORA
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="user_type" value="1" {{ old('user_type') == '1' ? 'checked' : '' }} id="user_type">
+          <label class="form-check-label" for="status">
+            OPERADORA
+          </label>
+        </div>
+        <hr>
       </div>
       <div class="col-12 mb-5">
         <p>Status</p>
