@@ -16,7 +16,7 @@
         <tr>
           <th scope="col">PROTOCOLO</th>
           <th scope="col">ADMINISTRADORA</th>
-          <th scope="col">MÊS REFERÊNCIA</th>
+          <th scope="col">DATA REFERÊNCIA</th>
         </tr>
       </thead>
       <tbody>

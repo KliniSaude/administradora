@@ -61,7 +61,12 @@ Route::middleware(['auth'])->group(function () {
    * DASHBOARD
    */
   Route::get('/dashboard-operacao', 'Operadora\\ProposeController@index')->name('operadora.dashboard');
-  Route::get('/proposta/{id}', 'Operadora\\ProposeController@show')->name('operadora.propostas');
+  Route::get('/proposta-operacao/{id}', 'Operadora\\ProposeController@show')->name('operadora.propostas');
+
+  /**
+   * Proposta
+   */
+  Route::get('/editar-proposta/{id}', 'Operadora\\ProposeController@edit')->name('operadora.edit.proposta');
 
   /**
    * USER

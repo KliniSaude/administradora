@@ -16,7 +16,7 @@
         <tr>
           <th scope="col">PROTOCOLO</th>
           <th scope="col">ADMINISTRADORA</th>
-          <th scope="col">MÊS REFERÊNCIA</th>
+          <th scope="col">DATA REFERÊNCIA</th>
         </tr>
       </thead>
       <tbody>
@@ -24,11 +24,11 @@
           <tr class="table-{{ $movement->statusID == 5 ? 'warning' : 'light' }}">
             @if ($movement->data_inclusao)
             <th scope="row">
-              <a href="{{ url('proposta', ['inclusao' => 'in.'.$movement->data_inclusao]) }}" rel="noopener noreferrer">IN{{ $movement->data_inclusao }}</a>
+              <a href="{{ url('proposta-operacao', ['inclusao' => 'in.'.$movement->data_inclusao]) }}" rel="noopener noreferrer">IN{{ $movement->data_inclusao }}</a>
             </th>
             @else
             <th scope="row">
-              <a href="{{ url('proposta', ['exclusao' => 'ex.'.$movement->data_exclusao]) }}" rel="noopener noreferrer">EX{{ $movement->data_exclusao }}</a>
+              <a href="{{ url('proposta-operacao', ['exclusao' => 'ex.'.$movement->data_exclusao]) }}" rel="noopener noreferrer">EX{{ $movement->data_exclusao }}</a>
             </th>
             @endif
             <td>{{ $movement->nome_empresa }}</td>

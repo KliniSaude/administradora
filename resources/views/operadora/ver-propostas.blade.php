@@ -3,24 +3,24 @@
 <div class="container py-5">
 
   <a href="{{ url()->previous() }}" class="btn btn-klini-secondary btn-lg text-white"><i class="fas fa-arrow-left"></i> voltar</a>
-  <a href="{{ route('admin.create.proposta') }}" class="btn btn-klini-primary btn-lg text-white"><i class="fas fa-plus"></i> cadastrar nova proposta</a>
+  {{-- <a href="{{ route('admin.create.proposta') }}" class="btn btn-klini-primary btn-lg text-white"><i class="fas fa-plus"></i> cadastrar nova proposta</a> --}}
 
   <form action="../classes/Selects.php" method="post">
     <div class="row mt-5">
       <div class="col-md-2">
         <label class="form-label">Mês da compêtencia</label>
-        <input type="month" class="form-control mb-3" id="mes_competencia">
+        <input type="month" class="form-control mb-3" id="mes_competencia" disabled>
       </div>
       <div class="col-md-3">
         <label class="form-label">Entidade</label>
-        <select class="form-select" aria-label="Escolha uma opção">
+        <select class="form-select" aria-label="Escolha uma opção" disabled>
           <option selected></option>
           <option value=""></option>
         </select>
       </div>
       <div class="col-md-2">
         <label class="form-label">Vigência</label>
-        <select class="form-select" aria-label="Escolha uma opção">
+        <select class="form-select" aria-label="Escolha uma opção" disabled>
           <option selected></option>
           <option value=""></option>
         </select>
@@ -28,7 +28,7 @@
       </div>
       <div class="col-md-2">
         <label class="form-label">Status</label>
-        <select class="form-select" name="status" aria-label="Escolha uma opção">
+        <select class="form-select" name="status" aria-label="Escolha uma opção" disabled>
           <option selected></option>
           <option value=""></option>
         </select>
@@ -60,7 +60,7 @@
             <th scope="col">ENTIDADE</th>
             <th scope="col">VIGÊNCIA</th>
             <th scope="col">STATUS</th>
-            <th scope="col">Editar/Excluir</th>
+            <th scope="col">analisar</th>
           </tr>
         </thead>
         <tbody>
@@ -81,13 +81,8 @@
             <td>{{ $proposal->status }}</td>
             @endif
             <td class="d-flex align-items-center">
-              <a class="btn btn-klini-primary text-white" href="{{ route('admin.edit.proposta', $proposal->id) }}"
-                role="button"><i class="fas fa-edit"></i></a>
-              <form action="{{ route('admin.destroy.proposta', $proposal->id) }}" method="post" class="mx-1">
-                @csrf
-                {{ method_field('DELETE') }}
-                <button type="submit" class="btn bg-danger text-white"><i class="fas fa-trash-alt"></i></button>
-              </form>
+              <a class="btn btn-klini-primary text-white" href="{{ route('operadora.edit.proposta', $proposal->id) }}"
+                role="button"><i class="fas fa-eye"></i></a>
             </td>
           </tr>
 
