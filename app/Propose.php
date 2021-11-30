@@ -42,6 +42,7 @@ class Propose extends Model
         'telefone',
         'data_exclusao',
         'codigo_motivo_exclusao',
+        'mensagem',
         'fk_status',
         'fk_contrato',
     ];

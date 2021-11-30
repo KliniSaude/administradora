@@ -67,6 +67,8 @@ Route::middleware(['auth'])->group(function () {
    * Proposta
    */
   Route::get('/editar-proposta/{id}', 'Operadora\\ProposeController@edit')->name('operadora.edit.proposta');
+  Route::put('/corrigir/{id}', 'Operadora\\ProposeController@correct')->name('operadora.correct.proposta');
+  Route::put('/tudo-ok/{id}', 'Operadora\\ProposeController@ok')->name('operadora.ok.proposta');
 
   /**
    * USER

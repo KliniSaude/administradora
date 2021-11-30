@@ -2,7 +2,7 @@
 @section('content')
 <!-- multistep form -->
 <div class="container ">
-  <form method="POST" action="{{ route('operadora.update.proposta', ['id' => $propose->id]) }}">
+  <form method="POST" action="{{ route('operadora.ok.proposta', ['id' => $propose->id]) }}">
     @csrf
     @method('PUT')
 
@@ -251,7 +251,7 @@
       </div>
     </div>
 
-    <div class="row mb-5 border p-3">
+    <div class="row border p-3">
       <h3 class="fs-6 text-secondary"><i class="fas fa-heartbeat"></i> Dados do Plano</h3>
       <div class="col-md-4 mb-2">
         <label class="form-label">Código Empresa</label>
@@ -265,7 +265,7 @@
           <option value="3002" {{ $propose->codigo_plano == '3002' ? 'selected' : (old('codigo_plano') == '3002' ? 'selected' : '') }}>KLINI PRIME CA</option>
         </select>
       </div>
-      <div class="col-md-4 mb-2">
+      <div class="col-md-4">
         <label class="form-label">Plano Dental</label>
         <select name="codigo_plano" id="codigo_plano" class="form-select" disabled>
           <option>Plano Dental</option>
@@ -275,14 +275,24 @@
       </div>
     </div>
 
-    <div class="row mb-5 border border-info border-4 p-3">
+    <div class="row mb-5">
+      <button class="btn btn-primary bg-primary text-white" type="submit"><i class="fas fa-check"></i> Tudo certo!</button>
+    </div>
+  </form>
+
+  <form action="{{ route('operadora.correct.proposta', ['id' => $propose->id]) }}" method="post" class="my-2">
+    @csrf
+    {{ method_field('PUT') }}
+    <div class="row border border-info border-4 p-3">
       <h3 class="fs-6 text-secondary"><i class="fas fa-check-double"></i> Correções a serem feitas</h3>
       <div class="col-md-12 mb-2">
         <label class="form-label">Informe os campos que devem ser corrigidos</label>
-        <textarea class="form-control" name="" placeholder="Ex.: Campo Nome Titulo: Nome incompleto, Campo CPF Titular: Cpf não encontrado na base"></textarea>
+        <textarea class="form-control" name="mensagem" placeholder="Ex.: Campo Nome Titulo: Nome incompleto, Campo CPF Titular: Cpf não encontrado na base">Existe campos a serem corrigidos</textarea>
       </div>
     </div>
-
+    <div class="row">
+      <button type="submit" class="btn btn-primary bg-warning text-white"><i class="fas fa-times"></i> Corrigir</button>
+    </div>
   </form>
 </div>
 @endsection

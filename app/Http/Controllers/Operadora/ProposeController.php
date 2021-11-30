@@ -155,7 +155,7 @@ class ProposeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**
@@ -167,5 +167,26 @@ class ProposeController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function correct(Request $request, $id)
+    {
+        $propose = Propose::where('id', $id)->first();
+        $propose->mensagem = $request->mensagem;
+        $propose->setFkStatusAttribute(5);
+
+       $propose->save();
+
+       return redirect('dashboard-operacao')->with('message', 'Mensagem foi enviada para correção.');
+    }
+
+    public function ok(Request $request, $id)
+    {
+        $propose = Propose::where('id', $id)->first();
+        $propose->setFkStatusAttribute(8);
+
+        $propose->save();
+
+        return redirect('dashboard-operacao')->with('message', 'Proposta aprovada!');
     }
 }
