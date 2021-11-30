@@ -42,7 +42,7 @@ class ProposeController extends Controller
                         ->get();
 
         return view('administradora.cadastrar-proposta', [
-            'user' => $user->name,
+            'user' => $user,
             'users' => $user,
             'entities' => $entities
         ]);

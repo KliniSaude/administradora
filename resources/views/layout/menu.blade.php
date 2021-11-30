@@ -14,7 +14,7 @@
             <div class="offcanvas-header justify-content-around">
                 <!-- <span><i class="fas fa-user fs-3"></i></span> -->
                 <img class="rounded-circle" src="{{ $user->profile_photo != NULL ? asset($user->profile_photo) : asset('storage/img/logos/perfil-female.png') }}"
-                    alt="Profile User" width="60px" height="60px">
+                    alt="Profile User" width="90px" height="90px">
                 <h5 class="offcanvas-title" id="offcanvasExampleLabel"> {{ $user->name }} <br>
                     <small class="text-uppercase text-muted fw-light" style="font-size: 12px;"> {{ $user->user_type == 0 ? 'administradora' : 'operadora' }}</small>
                 </h5>
@@ -68,6 +68,7 @@
 
                 </ul>
             </div>
+            <p class="text-center text-opacity-25 text-small"><small>version: 1.0.0 alfa</small></p>
         </div>
     </div>
 </header>

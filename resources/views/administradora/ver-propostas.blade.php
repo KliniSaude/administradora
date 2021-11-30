@@ -70,12 +70,12 @@
               <input class="form-check-input export_selected" type="checkbox" value="" name="" id="">
             </th>
             <th scope="row">{{ $proposal->id }}</th>
-            <td>{{ $proposal->nome_associado }}</td>
+            <td class="text-nowrap">{{ $proposal->nome_associado }}</td>
             <td>{{ $proposal->cpf }}</td>
-            <td>{{ $proposal->nome_entidade }}</td>
+            <td class="text-nowrap">{{ $proposal->nome_entidade }}</td>
             <td>{{ $proposal->data }}</td>
             @if ($proposal->statusID == 5)
-            <td><a class="btn bg-warning text-white" href="" data-bs-toggle="modal" data-bs-target="#_{{ $proposal->id }}"
+            <td class="text-nowrap"><a class="btn bg-warning text-white" href="" data-bs-toggle="modal" data-bs-target="#_{{ $proposal->id }}"
                 role="button"><i class="fas fa-exclamation-triangle"></i> {{ $proposal->status }}</a></td>
             @else
             <td>{{ $proposal->status }}</td>
