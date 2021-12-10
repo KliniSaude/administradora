@@ -16,6 +16,7 @@ mix.js('resources/js/app.js', 'public/js');
 
 mix.js('resources/js/jquery.js', 'public/js')
     .js('resources/js/scripts.js', 'public/js')
+    .js('resources/js/propose.js', 'public/js')
 
     .sass('resources/sass/style.scss', 'public/css')
 

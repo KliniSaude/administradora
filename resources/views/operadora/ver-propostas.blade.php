@@ -41,7 +41,7 @@
 
   <div class="row mt-5">
     <div class="col md-3">
-      <button type="button" class="btn btn-klini-secondary btn-lg text-white" id="exportar_propostas"><i
+      <button type="button" class="btn btn-klini-secondary btn-lg text-white" id="exportar_propostas" data-route="{{ route('propose.export') }}"><i
           class="fas fa-cloud-download-alt"></i> exportar propostas selecionadas</button>
     </div>
   </div>
@@ -67,7 +67,7 @@
           @foreach ($proposals as $proposal)
           <tr>
             <th scope="row">
-              <input class="form-check-input export_selected" type="checkbox" value="{{ $proposal->id }}" name="" id="selected_propose">
+              <input class="form-check-input export_selected" type="checkbox" value="{{ $proposal->id }}" id="selected_propose">
             </th>
             <th scope="row">{{ $proposal->id }}</th>
             <td class="text-nowrap">{{ $proposal->nome_associado }}</td>

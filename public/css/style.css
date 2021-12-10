@@ -11611,3 +11611,9 @@ input:focus {
   box-shadow: 0 0 0 0.25rem #31d1ad40 !important;
 }
 
+@media (max-width: 1024px) {
+  table td {
+    font-size: 0.695rem;
+  }
+}
+

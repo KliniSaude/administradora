@@ -42,6 +42,7 @@
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/scripts.js') }}"></script>
+    <script src="{{ asset('js/propose.js') }}"></script>
 
     @include('administradora.includes.delete-dependent')
 </body>

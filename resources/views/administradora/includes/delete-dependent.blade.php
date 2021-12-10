@@ -5,7 +5,7 @@
     btnRemove.forEach(item => {
       item.addEventListener('click', () => {
         const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        const url = `{{ route('admin.destroyDependent.proposta')}}`;
+        const url = `{{ route('admin.destroyDependent.proposta') }}`;
         const method = 'POST';
 
         const settings = {
