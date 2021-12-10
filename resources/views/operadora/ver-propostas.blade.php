@@ -53,7 +53,7 @@
       <table class="table align-middle table-striped table-bordered">
         <thead>
           <tr>
-            <th scope="col"></th>
+            <th scope="col"><input class="form-check-input export_selected" type="checkbox" id="all_selected"></th>
             <th scope="col">#ID</th>
             <th scope="col">NOME</th>
             <th scope="col">CPF</th>
@@ -67,7 +67,7 @@
           @foreach ($proposals as $proposal)
           <tr>
             <th scope="row">
-              <input class="form-check-input export_selected" type="checkbox" value="" name="" id="">
+              <input class="form-check-input export_selected" type="checkbox" value="{{ $proposal->id }}" name="" id="selected_propose">
             </th>
             <th scope="row">{{ $proposal->id }}</th>
             <td class="text-nowrap">{{ $proposal->nome_associado }}</td>

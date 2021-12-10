@@ -25,7 +25,7 @@
     <div class="col-4">
       <div class="col-12 mb-5">
         <div class="d-flex flex-column justify-content-center align-items-center">
-          <img class="rounded-circle" src="{{ asset($users->profile_photo) }}" style="width: 210px; height: 210px">
+          <img class="rounded-circle" src="{{ asset($users->profile_photo) }}" class="rounded-circle" style="width: 300px; height: 300px;">
         </div>
       </div>
       <div class="col-12 mb-5">

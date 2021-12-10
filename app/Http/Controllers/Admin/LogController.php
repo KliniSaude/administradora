@@ -26,7 +26,7 @@ class LogController extends Controller
 
         return view('log.log', [
             'users' => $user,
-            'user' => $user->name,
+            'user' => $user,
             'logs' => $logs
         ]);
     }

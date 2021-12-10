@@ -8,18 +8,18 @@
     <div class="row mt-5">
       <div class="col-md-2">
         <label class="form-label">Mês da compêtencia</label>
-        <input type="month" class="form-control mb-3" id="mes_competencia">
+        <input type="month" class="form-control mb-3" id="mes_competencia" disabled>
       </div>
       <div class="col-md-3">
         <label class="form-label">Entidade</label>
-        <select class="form-select" aria-label="Escolha uma opção">
+        <select class="form-select" aria-label="Escolha uma opção" disabled>
           <option selected></option>
           <option value=""></option>
         </select>
       </div>
       <div class="col-md-2">
         <label class="form-label">Vigência</label>
-        <select class="form-select" aria-label="Escolha uma opção">
+        <select class="form-select" aria-label="Escolha uma opção" disabled>
           <option selected></option>
           <option value=""></option>
         </select>
@@ -27,7 +27,7 @@
       </div>
       <div class="col-md-2">
         <label class="form-label">Status</label>
-        <select class="form-select" name="status" aria-label="Escolha uma opção">
+        <select class="form-select" name="status" aria-label="Escolha uma opção" disabled>
           <option selected></option>
           <option value=""></option>
         </select>
